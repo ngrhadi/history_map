@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta name="description" content="Story place when I was visited, not all but enough to tell you I was not only at home when I was young">
+  <title>Ngrhadi - Maps Journey</title>
+  {{include "/header.html"}}
+<body>
+  {{include "/components/top.html"}}
+    <div class="flex w-full justify-between">
+      <div id="main max-w-[80%]">
+        {{include "/components/popup1.html"}}
+
+
+        {{include "/components/popup2.html"}}
+        <div class="bg-zinc-900 w-screen h-screen p-0 relative inline-block">
+          <div id="map" class="z-0"></div>
+
+          {{include "/components/search-box.html"}}
+        </div>
+      </div>
+      {{include "/components/navbar.html"}}
+    </div>
+
+
+</body>
+<script src="/assets/js/scripts.js"></script>
+</html>

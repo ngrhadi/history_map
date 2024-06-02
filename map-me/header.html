@@ -1,12 +1,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- <link
+  <meta name="description" content="Wong jowo biasa">
+  <link
     rel="icon"
     type="image/png"
     sizes="96x96"
-    href="/assets/images/mahika.png"
-  /> -->
+    href="/assets/images/me-avatar.png"
+  />
   <script defer src="/assets/js/tailwind.js"></script>
   <style type="text/tailwindcss">
     @layer utilities {
@@ -24,16 +25,11 @@
     }
 
     .nav-item {
-      background-color: #c6edf7;
-      color: black;
+      color: white;
       width: 100%;
-      text-align: center;
       display: flex;
       align-items: center;
-      justify-content: center;
       cursor: pointer;
-      border-left: 2px solid white;
-      border-right: 2px solid white;
     }
 
     .nav-item.active {
@@ -58,6 +54,12 @@
       display: flex;
       justify-content: space-between;
     }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
   </style>
   <script
     defer
@@ -74,13 +76,77 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/EaselPlugin.min.js"></script>
 
-  <!-- <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/build/ol.js"></script> -->
-  <!-- <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"></script> -->
   <script src="/assets/js/mapbox.js"></script>
 
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-  <title>Maps Journey</title>
+  <title>Ngrhadi</title>
   <link href="/assets/css/mapbox.css" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <meta name="description" content="Together We Grow" />
+  <script type="application/javascript">
+function animateTyping() {
+  const textLength = document.getElementById('typing-text').textContent.length;
+  const animationDuration = textLength * 0.1 + 's';
+
+  // Apply typing animation
+  document.getElementById('typing-text').style.animation = `typing ${animationDuration} steps(${textLength}, end)`;
+
+  // Optional: Remove animation after it finishes to prevent repeating
+  document.getElementById('typing-text').addEventListener('animationend', () => {
+    document.getElementById('typing-text').style.animation = 'none';
+  });
+}
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+      gsap.registerPlugin(ScrollTrigger, CustomEase);
+
+      /*-- ScrollTrigger 1: sections scroll and snap vertically ------*/
+      let sections = gsap.utils.toArray('section');
+      let snap = value => value; // a snapping function that we'll set later in a "refresh" event listener because we need all the ScrollTrigger positions to get calculated first
+
+      // this ScrollTrigger covers the entire page and is just for snapping logic
+      ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        snap: {
+          snapTo: (value, self) => snap(value, self.direction),
+          duration: { min: 0.2, max: 0.4 },
+          delay: 0,
+        }
+      });
+
+      let panels = gsap.utils.toArray(".panel .sample");
+
+      let panelTween = gsap.to(panels, {
+        xPercent: -100 * (panels.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".sample",
+          start: "top top",
+          end: "+=" + (innerWidth * 3),
+          // markers: true,
+          pin: true,
+          scrub: 0,
+        },
+      });
+
+      let sectionTriggers = sections.map(section => ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        refreshPriority: -1 // just so they get calculated last
+      }));
+
+        console.log(panelTween,'panelTween');
+
+      // after ScrollTrigger refreshes, we create a snap function that's directional.
+      ScrollTrigger.addEventListener("refresh", () => {
+        let start = panelTween.scrollTrigger.start,
+        end = panelTween.scrollTrigger.end,
+        each = (end - start) / (panels.length - 1), // each panel takes up a certain distance
+        max = ScrollTrigger.maxScroll(window),
+        sectionPositions = sectionTriggers.map(trigger => trigger.start / max); // snapping values must be in ratios (between 0 and 1)
+        panels.forEach((panel, i) => sectionPositions.push((start + i * each) / max)); // add the panel positions
+        snap = ScrollTrigger.snapDirectional(sectionPositions); // a snapping function that we can just feed a scroll value to and a direction and it'll spit back the closest one (ratio/progress) in that direction
+      });
+    });
+  </script>
 </head>

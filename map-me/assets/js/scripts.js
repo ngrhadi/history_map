@@ -610,3 +610,5 @@ for (const feature of data.features) {
   // make a marker for each feature and add it to the map
   new mapboxgl.Marker(el).setLngLat(feature.geometry.coordinates).addTo(map);
 }
+
+

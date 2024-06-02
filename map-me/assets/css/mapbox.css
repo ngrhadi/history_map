@@ -58,7 +58,7 @@
     position: absolute;
     pointer-events: none;
     z-index: 2;
-    top: 2.5rem;
+    top: 5.5rem;
     left: 4px;
 }
 
@@ -96,7 +96,6 @@
 .mapboxgl-ctrl-top-right .mapboxgl-ctrl {
     margin: 10px 10px 0 0;
     float: right;
-    top: 10rem;
 }
 
 .mapboxgl-ctrl-bottom-left .mapboxgl-ctrl {
@@ -437,7 +436,6 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
     }
 
     .mapboxgl-ctrl-top-right>.mapboxgl-ctrl-attrib.mapboxgl-compact:after {
-        top: 90rem;
         right: 0
     }
 

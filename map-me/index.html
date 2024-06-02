@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   {{include "/header.html"}}
-<body>
-    {{include "/components/popup1.html"}}
-
-    <div class="bg-zinc-900 w-screen h-screen p-0 relative inline-block">
-      <div id="map" class="z-0"></div>
-
-      {{include "/components/search-box.html"}}
+  <style></style>
+  <body
+    x-data="
+    let nav = ['introduction', 'projects', 'blogs', 'blogs', 'contact']
+    // make on scroll activate and disactivated
+  "
+    class=""
+  >
+    {{include "/components/top.html"}}
+    <div class="flex w-full justify-between">
+      <div id="main max-w-[80%]">
+        <section id="introduction" class="bg-zinc-900 active">
+          <div class="panel"> {{include "/pages/main.html"}} </div>
+        </section>
+        <section id="projects" class="bg-zinc-900">
+          {{include "/pages/project.html"}}
+        </section>
+        <section id="blogs" class="bg-zinc-900">
+          {{include "/pages/blog.html"}}
+        </section>
+        <section id="contact" class="bg-zinc-900">
+          {{include "/pages/contact.html"}}
+        </section>
+      </div>
+      {{include "/components/navbar.html"}}
     </div>
-
-
-    {{include "/components/popup2.html"}}
-</body>
-<script src="/assets/js/scripts.js"></script>
+  </body>
+  <script src="/assets/js/scripts.js"></script>
 </html>
